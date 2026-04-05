@@ -1,6 +1,6 @@
 <div align="center">
   
-# SiliconλLanguage
+# SiliconLanguage
 **Architecting post-Von Neumann AI infrastructure.**
 
 [![Website](https://img.shields.io/badge/siliconlanguage.com-000000?style=for-the-badge&logo=vercel&logoColor=00FFFF)](https://siliconlanguage.com)
