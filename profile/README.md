@@ -1,14 +1,8 @@
+--------------------------------------------------------------------------------
 <div align="center">
-  
-# SiliconLanguage
-**Architecting post-Von Neumann AI infrastructure.**
-
-[![Website](https://img.shields.io/badge/siliconlanguage.com-000000?style=for-the-badge&logo=vercel&logoColor=00FFFF)](https://siliconlanguage.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-000000?style=for-the-badge&logo=linkedin&logoColor=00FFFF)](https://linkedin.com/in/pinglong)
-
+  <img src="https://siliconlanguage.com/assets/logo-lockup-snipping-tool.png" width="360" alt="SiliconλLanguage Delta">
+  <h2>Architecting post-Von Neumann AI infrastructure.</h2>
 </div>
-
----
 
 ### ⬛ The Monadic Paradigm
 As generative AI models scale into the trillions of parameters and agentic workflows demand real-time state manipulation, traditional OS kernels have become the primary bottleneck. We build **0-kernel, 0-copy, NVMe-oF data planes** and bare-metal virtualization frameworks that fuse compute, memory, and I/O into a single, deterministic fabric. 
