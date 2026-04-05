@@ -1,32 +1,45 @@
+--------------------------------------------------------------------------------
 <div align="center">
-  
-# SiliconλLanguage
-**Architecting post-Von Neumann AI infrastructure.**
-
-[![Website](https://img.shields.io/badge/siliconlanguage.com-000000?style=for-the-badge&logo=vercel&logoColor=00FFFF)](https://siliconlanguage.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-000000?style=for-the-badge&logo=linkedin&logoColor=00FFFF)](https://linkedin.com/in/pinglong)
-
+  <img src="https://siliconlanguage.com/assets/glowing_triangle_logo.svg" width="120" alt="SiliconλLanguage Delta">
+  <h1>The SiliconλLanguage Foundry</h1>
+  <p><b>Post-Von Neumann Data Planes for Agentic AI and Hyperscale Infrastructure</b></p>
 </div>
 
 ---
 
-### ⬛ The Monadic Paradigm
-As generative AI models scale into the trillions of parameters and agentic workflows demand real-time state manipulation, traditional OS kernels have become the primary bottleneck. We build **0-kernel, 0-copy, NVMe-oF data planes** and bare-metal virtualization frameworks that fuse compute, memory, and I/O into a single, deterministic fabric. 
+### ⬛ The Architectural Crisis: The OS Kernel Bottleneck
+As generative AI scales into trillion-parameter models and autonomous agents execute high-frequency, stateful workflows, traditional POSIX-compliant operating systems have become the primary bottleneck. The Linux Virtual File System (VFS), context-switching jitter, and traditional interrupt-driven I/O paths create unacceptable microsecond-latency taxes that starve modern AI accelerators and DPUs. 
 
-By treating the host CPU as a pure computational engine and offloading side-effects to hardware-accelerated structures, we eliminate context-switching jitter and feed AI accelerators at line rate.
+### ⚡ Our Solution: The Monadic Paradigm
+SiliconλLanguage is engineering the transition to **0-kernel, 0-copy, bare-metal infrastructure**. We treat the host CPU as a pure computational engine (the $\lambda$) and offload all side-effects, state mutations, and I/O directly to hardware-accelerated data planes. 
 
-### ⚡ Core Infrastructure Foundry
+By leveraging **SPDK, DPDK, and hardware-assisted message passing**, we allow applications to stream data directly from NVMe over Fabrics (NVMe-oF) into user-space memory, bypassing the kernel entirely.
 
-*   **[`m-store`](https://github.com/SiliconLanguage/m-store):** A zero-kernel, user-space storage engine leveraging lock-free SPDK queues and NVMe-oF to bypass the Linux VFS entirely. Designed to accelerate the persistence layers of in-memory distributed databases.
-*   **[`m-ipc`](https://github.com/SiliconLanguage/m-ipc):** A bare-metal, hardware-assisted messaging framework. Built for RISC-V many-core scaled-up clusters to eliminate the "synchronization tax" using cache-pollution mitigation and zero-copy semantics.
-*   **[`dataplane-emu`](https://github.com/SiliconLanguage/dataplane-emu):** A hardware-accurate C++ emulation framework for direct-to-silicon data planes. Enables transparent POSIX interception (`LD_PRELOAD`) to route legacy workloads directly into user-space queues without application rewrites.
+---
 
-### 🔬 Architecture & Research
-We actively research and engineer at the intersection of:
-- **Bare-Metal Virtualization:** Scalable I/O Virtualization (SIOV) and DPU/SmartNIC offloading.
-- **Hardware-Software Co-Design:** ARM64 (Graviton) weak memory ordering optimizations and RISC-V custom extensions.
-- **Zero-Trust Agentic Gateways:** Deterministic, hardware-isolated Model Context Protocol (MCP) routing.
+### 🏗️ Core Infrastructure Suite
 
-<div align="center">
-  <code>root@silicon-lang:~# ./init_foundry.sh</code>
-</div>
+#### 1. `m-store` (Monadic Store)
+A zero-kernel, user-space storage engine designed to accelerate the persistence layers of in-memory distributed databases (like SAP HANA or cloud-native SQL). 
+*   **Architecture:** Pluggable data structures (LSM trees, Distributed WALs) operating directly on raw NVMe-oF via lock-free SPDK queues.
+*   **Target:** Eliminating filesystem overhead for microsecond-latency database checkpointing.
+
+#### 2. `dataplane-emu`
+A hardware-accurate C++ data plane emulator for testing and validating zero-copy I/O without requiring specialized NICs or DPUs.
+*   **Transparent Enablement:** Features an `LD_PRELOAD` POSIX-interception trampoline that catches legacy system calls (`open`, `read`, `write`) and routes them seamlessly into user-space lock-free queues.
+*   **Execution Model:** Simulates DPDK-style thread-per-core pinning and zero-latency queue polling.
+
+#### 3. `m-ipc` (Monadic IPC)
+A bare-metal, hardware-assisted messaging framework built for massively parallel, scaled-up clusters.
+*   **RISC-V Optimization:** Leverages custom ISA extensions and shared L1 memory architectures (inspired by ETH Zurich's MemPool project) to mitigate cache pollution during heavy data streaming.
+*   **Hardware Synergy:** Designed to utilize non-temporal locality hints and hardware synchronization primitives to eliminate the traditional "synchronization tax."
+
+---
+
+### 🔬 Hardware-Software Co-Design Focus
+We do not believe software can be optimized in isolation. Our foundries are rigorously optimized for specific, modern silicon:
+*   **ARM64 / AWS Graviton:** Extreme optimization for ARM's weak memory ordering, utilizing `-march=armv8.2-a+lse` Large System Extensions (LSE) atomics for lock-free concurrency.
+*   **RISC-V:** Researching custom instruction sets (like `Zihintntl` for non-temporal locality hints and `Zawrs` for wait-on-reservation-set) to build the ultimate event-driven, bare-metal AI data plane.
+*   **Agentic Gateways:** Building deterministic, hardware-isolated Model Context Protocol (MCP) routers to secure AI workflows.
+
+--------------------------------------------------------------------------------
