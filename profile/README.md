@@ -10,10 +10,10 @@ As generative AI models scale into the trillions of parameters and agentic workf
 By treating the host CPU as a pure computational engine and offloading side-effects to hardware-accelerated structures, we eliminate context-switching jitter and feed AI accelerators at line rate.
 
 ### ⚡ Core Infrastructure Foundry
-
+*   **[`dataplane-emu`](https://github.com/SiliconLanguage/dataplane-emu):** A hardware-accurate C++ emulation framework for direct-to-silicon data planes. Enables transparent POSIX interception (`LD_PRELOAD`) to route legacy workloads directly into user-space queues without application rewrites.
+*   **[`monadic-hypervisor`](https://github.com/SiliconLanguage/monadic-hypervisor):** *(In Development)* A mathematically verifiable, bare-metal virtualization architecture [3]. It treats the host CPU as a pure computational engine by shifting all network and storage "side-effects" to out-of-band DPUs (e.g., NVIDIA BlueField-3) [2, 3]. It leverages Scalable I/O Virtualization (SIOV) and PASID tracking to multiplex PCIe devices across hyperscale multi-tenant boundaries without host-CPU emulation overhead [3, 4].
 *   **[`m-store`](https://github.com/SiliconLanguage/m-store):** A zero-kernel, user-space storage engine leveraging lock-free SPDK queues and NVMe-oF to bypass the Linux VFS entirely. Designed to accelerate the persistence layers of in-memory distributed databases.
 *   **[`m-ipc`](https://github.com/SiliconLanguage/m-ipc):** A bare-metal, hardware-assisted messaging framework. Built for RISC-V many-core scaled-up clusters to eliminate the "synchronization tax" using cache-pollution mitigation and zero-copy semantics.
-*   **[`dataplane-emu`](https://github.com/SiliconLanguage/dataplane-emu):** A hardware-accurate C++ emulation framework for direct-to-silicon data planes. Enables transparent POSIX interception (`LD_PRELOAD`) to route legacy workloads directly into user-space queues without application rewrites.
 
 ### 🔬 Architecture & Research
 We actively research and engineer at the intersection of:
