@@ -2,7 +2,7 @@
   <img src="https://siliconlanguage.com/assets/logo-lockup-snipping-tool.png" width="360" alt="SiliconλLanguage Delta">
   <h2>Architecting post-Von Neumann AI infrastructure.</h2>
   <br>
-  <p><b>📖 <a href="docs/vision.md">Read The Tensorplane & m-store Manifesto</a></b></p>
+  <p><b>📖 <a href="https://github.com/SiliconLanguage/.github/blob/main/docs/vision.md">Read The Tensorplane & m-store Manifesto</a></b></p>
 </div>
 
 ### ⬛ The Monadic Paradigm
