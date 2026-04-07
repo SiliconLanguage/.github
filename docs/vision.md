@@ -1,17 +1,18 @@
 # The Tensorplane & `m-store` Manifesto
 
-## 1. Executive Summary: The Monadic Taxonomy
+## Executive Summary: The Monadic Taxonomy
 The era of monolithic, kernel-bound operating systems is over. To meet the exascale demands of autonomous AI, we introduce a disaggregated, hardware-accelerated computing continuum based on the **Monadic Taxonomy**. 
 
-*   **Tensorplane (The Agentic Control Plane / "The Brain"):** A Recursive Self-Improving AI Foundry driven by a Multi-Agent System (MAS). It autonomously monitors telemetry, dynamically provisions cloud infrastructure, and hot-swaps newly generated C++/Rust kernels into the data plane.
-*   **`m-store` (The AI-Native Data Fabric / "The Body"):** A zero-kernel, multi-cloud computational storage engine that eliminates the I/O bottlenecks of the Linux Virtual File System (VFS). It bridges physical memory, local NVMe, and cloud object storage into a single, lock-free **Silicon Data Substrate**.
+## 1. The Brain & Body
+*   **Tensorplane (The Agentic Control Plane / "The Brain"):** A Recursive Self-Improving AI Foundry driven by a Multi-Agent System (MAS). Utilizing the **Model Context Protocol (MCP)**, it autonomously monitors **eBPF-driven telemetry** (via tools like Cilium and Tetragon), performs dynamic GPU fractioning, and hot-swaps newly generated C++/Rust kernels into the data plane.
+*   ⚡ ⚛️ **`m-store` (The Unified Memory & State Orchestration Fabric / "The Body"):** A zero-kernel, RDMA-first data plane that eliminates the AI "memory wall" and the I/O bottlenecks of the Linux Virtual File System (VFS). It bridges physical GPU VRAM, local NVMe, and **CXL 3.1 Global Integrated Memory** into a single, lock-free **Silicon Data Substrate**.
 
 ## 2. The AI Workload Core
-Legacy storage forces applications to interact with files. `m-store` discards this abstraction, acting as a highly specialized data plane built to feed compute-starved GPUs directly. 
+Legacy storage forces applications to interact with files. `m-store` discards this abstraction, acting as a highly specialized Memory & State Orchestration Fabric built to feed compute-starved GPUs directly. 
 
-*   **The Inference Core (KV Caching & MoE):** `m-store` natively supports complex KV cache abstractions. By utilizing user-space DMA, it allows inference engines to swap out massive KV caches and stream inactive Mixture of Experts (MoE) parameters directly from NVMe to GPU VRAM, completely avoiding the host CPU bounce buffer.
-*   **The Training Core (Dataloaders & Checkpointing):** Modeled after architectures like DeepSeek's 3FS, `m-store` separates metadata (managed via FoundationDB) from bulk data chunks (replicated via CRAQ). It routes massive sequential writes for distributed checkpointing into lock-free hardware queues, minimizing GPU idle time.
-*   **The RAG / Vector Database Core:** Traversing massive vector graphs (like DiskANN) generates continuous ~8KB random reads. `m-store` allows these pointer-chasing reads to bypass the kernel entirely, achieving sub-millisecond retrieval latencies without page-cache thrashing.
+*   **The Inference Substrate (vLLM & SGLang):** `m-store` natively supports complex KV cache abstractions. It acts as the shared KV-cache backend for **vLLM's PagedAttention**, routing memory vectors directly into persistent **Triton attention kernels** via PCIe, completely bypassing the CPU bounce buffer. For multi-step reasoning, it intercepts **SGLang's RadixAttention** LRU evictions, persisting prefix trees to high-speed NVMe to eliminate "memory amnesia" during complex agentic loops. It also streams inactive Mixture of Experts (MoE) parameters directly to GPU VRAM utilizing **GPUDirect Storage (GDS)**.
+*   **The Training Substrate (Dataloaders & Checkpointing):** Modeled after architectures like DeepSeek's 3FS, `m-store` separates metadata (managed via FoundationDB) from bulk data chunks (replicated via **Chain Replication with Apportioned Queries [CRAQ]**). It routes massive sequential writes for distributed checkpointing into lock-free hardware queues, minimizing GPU idle time.
+*   **The Agentic Memory & Vector Core (MCP & RAG):** As autonomous agents execute complex, multi-stage workflows, their active context windows quickly bloat. `m-store` provides **Agentic Episodic Memory (Engrams)** natively integrated with the Model Context Protocol (MCP), allowing agents to offload and retrieve state instantly. When traversing massive vector graphs (like DiskANN), `m-store` allows continuous ~8KB pointer-chasing reads to bypass the kernel entirely, achieving sub-millisecond retrieval latencies without VFS page-cache thrashing.
 
 ## 3. The Agentic Memory Spectrum
 As AI evolves into autonomous agents, `m-store` serves as the foundational persistence layer, mapping the entire spectrum of agentic memory directly to silicon:
